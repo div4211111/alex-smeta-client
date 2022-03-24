@@ -88,8 +88,8 @@ const EstimateCard = ({estimate}) => {
    }
 //876    4630
    const downloadHandler = () => {
-      const result = lines.map((el, i, arr) => {
-         if (el.section !== '' && arr[i - 1]?.section !== el.section) {
+     const result = lines.map((el, i, arr) => {
+         if (el.section !== '' && arr[i - 1]?.section !== arr[i].section) {
             countDocxRef.current = 1
             return [
                new TableRow({
@@ -118,6 +118,34 @@ const EstimateCard = ({estimate}) => {
                      })
                   ],
                }),
+               new TableRow({
+                  children: [
+                     new TableCell({
+                        width: {size: 876, type: WidthType.DXA},
+                        children:[new Paragraph({text: `${countDocxRef.current}`, alignment: AlignmentType.CENTER})]
+                     }),
+                     new TableCell({
+                        width: {size: 4630, type: WidthType.DXA},
+                        children:[new Paragraph({text: `${el.job}`, alignment: AlignmentType.CENTER})]
+                     }),
+                     new TableCell({
+                        width: {size: 876, type: WidthType.DXA},
+                        children:[new Paragraph({text: `${el.unit ? el.unit : '-'}`, alignment: AlignmentType.CENTER})]
+                     }),
+                     new TableCell({
+                        width: {size: 876, type: WidthType.DXA},
+                        children:[new Paragraph({text: `${el.count}`, alignment: AlignmentType.CENTER})]
+                     }),
+                     new TableCell({
+                        width: {size: 876, type: WidthType.DXA},
+                        children:[new Paragraph({text: `${el.price.toFixed(2)}`, alignment: AlignmentType.CENTER})]
+                     }),
+                     new TableCell({
+                        width: {size: 876, type: WidthType.DXA},
+                        children:[new Paragraph({text: `${el.totalPrice.toFixed(2)}`, alignment: AlignmentType.CENTER})]
+                     })
+                  ]
+               })
 
             ]
          }
